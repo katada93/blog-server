@@ -20,7 +20,7 @@ module.exports.usersController = {
       if (candidate) {
         return res
           .status(409)
-          .json({ message: 'Пользователь с таким email уже существует!' });
+          .json({ message: 'Пользователь с таким email уже существует' });
       }
 
       const salt = bcrypt.genSaltSync(10);
@@ -34,7 +34,7 @@ module.exports.usersController = {
 
       return res.status(201).json({
         status: 'success',
-        message: 'Пользователь успешно зарегистрирован!',
+        message: 'Пользователь успешно зарегистрирован',
       });
     } catch (error) {
       return res.status(500).json({ message: error.message });
@@ -50,13 +50,13 @@ module.exports.usersController = {
       if (!candidate) {
         return res
           .status(404)
-          .json({ message: 'Пользователь с таким email не найден!' });
+          .json({ message: 'Пользователь с таким email не найден' });
       }
 
       const validPassword = bcrypt.compareSync(password, candidate.password);
 
       if (!validPassword) {
-        return res.status(401).json({ message: 'Введен неправильный пароль!' });
+        return res.status(401).json({ message: 'Введен неправильный пароль' });
       }
 
       const token = jwt.sign(
